@@ -26,7 +26,7 @@ pipeline {
             }
             post {
                failure {
-                    currentBuild.result = 'FAILURE'
+                    @currentBuild.result = 'FAILURE'
                     emailext subject: "Test Failed for ${currentBuild.fullDisplayName}",
                         body: "The test stage failed. Please investigate.",
                         to: 'waruigwanjiru@gmail.com' 
