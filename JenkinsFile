@@ -28,6 +28,9 @@ pipeline {
     }
 
     post {
+        success {
+            slackSend(channel: "#gideonwarui_ip1", color: "good", message: "Build Succeeded for ${currentBuild.fullDisplayName}")
+        }
         failure {
             script {
                 currentBuild.result = 'FAILURE'
@@ -35,6 +38,7 @@ pipeline {
             emailext subject: "Test Failed for ${currentBuild.fullDisplayName}",
                 body: "The test stage failed. Please investigate.",
                 to: 'waruigwanjiru@gmail.com'
+            slackSend(channel: "#gideonwarui_ip1l", color: "danger", message: "Build Failed for ${currentBuild.fullDisplayName} - Please investigate.")
         }
     }
 }
