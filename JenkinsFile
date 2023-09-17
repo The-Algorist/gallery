@@ -19,25 +19,22 @@ pipeline {
             }
         }
 
-        stage('Run Tests'){
+        stage('Run Tests') {
             steps {
                 // Run npm tests to run the tests defined
                 sh 'npm test'
             }
-            post {
-               failure {
-                    @currentBuild.result = 'FAILURE'
-                    emailext subject: "Test Failed for ${currentBuild.fullDisplayName}",
-                        body: "The test stage failed. Please investigate.",
-                        to: 'waruigwanjiru@gmail.com' 
-                    }
-                }
-            }
-        //stage('Deploy to Render') {
-            //teps {
-                // Start the server on Render using 'node server'
-                //sh 'node server'
-            //}
         }
     }
 
+    post {
+        failure {
+            script {
+                currentBuild.result = 'FAILURE'
+            }
+            emailext subject: "Test Failed for ${currentBuild.fullDisplayName}",
+                body: "The test stage failed. Please investigate.",
+                to: 'waruigwanjiru@gmail.com'
+        }
+    }
+}
