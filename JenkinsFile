@@ -19,11 +19,11 @@ pipeline {
             }
         }
         
-        stage('Deploy to Render') {
-            steps {
+        //stage('Deploy to Render') {
+            //teps {
                 // Start the server on Render using 'node server'
-                sh 'node server'
-            }
+                //sh 'node server'
+            //}
         }
     }
 }
