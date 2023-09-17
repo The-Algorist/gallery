@@ -29,7 +29,12 @@ pipeline {
 
     post {
         success {
-            slackSend(channel: "#gideonwarui_ip1", color: "good", message: "Build Succeeded for ${currentBuild.fullDisplayName}")
+            slackSend(
+                baseUrl:'https://app.slack.com/client/T05SQ8U89A6/C05SHKH8Y2J',
+                channel: "#gideonwarui_ip1", color: "good", 
+                message: "Build Succeeded for ${currentBuild.fullDisplayName}",
+                tokenCredentialId: 'X4dQ7YnvcWEbwzwp1weAjYI3'
+                )
         }
         failure {
             script {
@@ -38,7 +43,12 @@ pipeline {
             emailext subject: "Test Failed for ${currentBuild.fullDisplayName}",
                 body: "The test stage failed. Please investigate.",
                 to: 'waruigwanjiru@gmail.com'
-            slackSend(channel: "#gideonwarui_ip1l", color: "danger", message: "Build Failed for ${currentBuild.fullDisplayName} - Please investigate.")
+            slackSend(
+                baseUrl:'https://app.slack.com/client/T05SQ8U89A6/C05SHKH8Y2J',
+                channel: "#gideonwarui_ip1", color: "danger", 
+                message: "Build Failed for ${currentBuild.fullDisplayName} - Please investigate.",
+                tokenCredentialId: 'X4dQ7YnvcWEbwzwp1weAjYI3'
+                )
         }
     }
 }
