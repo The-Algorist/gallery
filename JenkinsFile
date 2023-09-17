@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+    tools {
+        npm "NodeJS"
+    }
+    
+    stages {
+        stage('Cloning the Git Gallery Repo') {
+            steps {
+                // Clone the GitHub Repository
+                git "https://github.com/The-Algorist/gallery"
+            }
+        }
+        
+        stage('Install Dependencies') {
+            steps {
+                // Run npm install to install project dependencies
+                sh 'npm install'
+            }
+        }
+        
+        stage('Deploy to Render') {
+            steps {
+                // Start the server on Render using 'node server'
+                sh 'node server'
+            }
+        }
+    }
+    
+    post {
+        always {
+            // Clean up or post-deployment steps, if necessary
+        }
+    }
+}
