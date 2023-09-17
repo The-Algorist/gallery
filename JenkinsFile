@@ -18,6 +18,13 @@ pipeline {
                 sh 'npm install'
             }
         }
+
+        stage('Run Tests'){
+            steps {
+                // Run npm tests to run the tests defined
+                sh 'npm test'
+            }
+        }
         
         //stage('Deploy to Render') {
             //teps {
