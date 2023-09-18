@@ -30,23 +30,25 @@ pipeline {
     post {
         success {
             slackSend(
+                // send a success build message to slack
 
                 channel: "#gideonwarui_ip1", color: "good", 
                 message: "Build Succeeded for ${currentBuild.fullDisplayName}"
                
                 )
-
-                emailext to: 'waruigwanjiru@gmail.com',
+                // send email to recipient (Used this to test the email functionality)
+                emailext to: "waruigwanjiru@gmail.com",
                          subject: "Build Succeeded for ${currentBuild.fullDisplayName}",
-                         body: 'The build ${currentBuild.fullDisplayName} has succeeded.'
+                         body: "The build ${currentBuild.fullDisplayName} has succeeded."
         }
         failure {
             script {
-                currentBuild.result = 'FAILURE'
+                // if current build fails send and email and slack message to recipient
+                currentBuild.result = "FAILURE"
             }
-            emailext to: 'waruigwanjiru@gmail.com',
+            emailext to: "waruigwanjiru@gmail.com",
                      subject: "Build Failed for ${currentBuild.fullDisplayName}",
-                     body: 'The build ${currentBuild.fullDisplayName} has failed. Please Investigate.'
+                     body: "The build ${currentBuild.fullDisplayName} has failed. Please Investigate."
 
             slackSend(
                
