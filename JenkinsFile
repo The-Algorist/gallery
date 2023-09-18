@@ -36,19 +36,18 @@ pipeline {
                
                 )
 
-                emailext plugin: 'email-ext',
-                            to: 'waruigwanjiru@gmail.com',
-                            subject: "Build Succeeded for ${currentBuild.fullDisplayName}",
-                            body: 'The build ${currentBuild.fullDisplayName} has succeeded.'
+                emailext to: 'waruigwanjiru@gmail.com',
+                         subject: "Build Succeeded for ${currentBuild.fullDisplayName}",
+                         body: 'The build ${currentBuild.fullDisplayName} has succeeded.'
         }
         failure {
             script {
                 currentBuild.result = 'FAILURE'
             }
-            emailext plugin: 'email-ext',
-                            to: 'waruigwanjiru@gmail.com',
-                            subject: "Build Failed for ${currentBuild.fullDisplayName}",
-                            body: 'The build ${currentBuild.fullDisplayName} has failed. Please Investigate.'
+            emailext to: 'waruigwanjiru@gmail.com',
+                     subject: "Build Failed for ${currentBuild.fullDisplayName}",
+                     body: 'The build ${currentBuild.fullDisplayName} has failed. Please Investigate.'
+
             slackSend(
                
                 channel: "#gideonwarui_ip1", color: "danger", 
